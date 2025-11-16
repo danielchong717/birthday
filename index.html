@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-HK">
 <head>
   <meta charset="UTF-8">
   <title>Happy Birthday!!!</title>
@@ -14,7 +14,8 @@
 
     body {
       background: url('three_chiikawas.jpg') no-repeat center center fixed;
-      background-size: cover;
+      background-size: contain;
+      background-color: #fff0f6;
       animation: bgFloat 10s ease-in-out infinite;
     }
 
@@ -44,6 +45,21 @@
       100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
     }
 
+    h1 {
+      position: absolute;
+      top: 30px;
+      width: 100%;
+      text-align: center;
+      font-size: 2.5em;
+      color: #ff69b4;
+      animation: bounce 1.5s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
     .letter {
       position: absolute;
       bottom: 20px;
@@ -71,14 +87,15 @@
       bottom: 120px;
       left: 50%;
       transform: translateX(-50%) scaleY(0);
-      width: 300px;
+      width: 320px;
       background: #fff;
       border: 2px solid #ff69b4;
       border-radius: 12px;
       padding: 20px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      text-align: center;
-      font-size: 1.2em;
+      text-align: left;
+      font-size: 1.1em;
+      line-height: 1.6em;
       transition: transform 0.5s ease;
       transform-origin: bottom;
     }
@@ -89,8 +106,9 @@
   </style>
 </head>
 <body>
+  <h1>🎉 Happy Birthday!!! 🎉</h1>
+
   <div class="confetti">
-    <!-- Generate 30 confetti pieces -->
     <script>
       for (let i = 0; i < 30; i++) {
         const confetti = document.createElement('div');
@@ -103,10 +121,14 @@
     </script>
   </div>
 
-  <div class="letter" onclick="toggleMessage()">💌 Open Letter</div>
+  <div class="letter" onclick="toggleMessage()">💌 打開信封</div>
   <div class="message" id="messageBox">
-    Wishing you the happiest birthday ever! 🎂✨  
-    May your day be filled with Chiikawa joy!
+    <strong>To: 妈咪</strong><br><br>
+    生日快樂 🥳🥳<br>
+    希望妈咪可以快啲退休，唔使再咁辛苦做嘢。<br>
+    每日都開心咁過生活，等我搵錢畀你慢慢使 🙂‍↕️🙂‍↕️，<br>
+    可以輕鬆咁享受人生，做自己鍾意嘅事。<br><br>
+    <strong>From: Daniel仔仔</strong>
   </div>
 
   <script>
