@@ -4,70 +4,117 @@
   <meta charset="UTF-8">
   <title>Happy Birthday!!!</title>
   <style>
-    body {
+    html, body {
       margin: 0;
       padding: 0;
-      background-color: #fff0f6;
+      height: 100%;
+      overflow: hidden;
       font-family: "Comic Sans MS", cursive, sans-serif;
+    }
+
+    body {
+      background: url('three_chiikawas.jpg') no-repeat center center fixed;
+      background-size: cover;
+      animation: bgFloat 10s ease-in-out infinite;
+    }
+
+    @keyframes bgFloat {
+      0%, 100% { background-position: center center; }
+      50% { background-position: center top; }
+    }
+
+    .confetti {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
       overflow: hidden;
     }
 
-    .container {
-      text-align: center;
-      padding: 40px 20px;
-      position: relative;
-    }
-
-    h1 {
-      font-size: 3em;
-      color: #ff69b4;
-      animation: bounce 1.5s infinite;
-    }
-
-    .tip {
-      font-size: 1.2em;
-      color: #555;
-      background: #ffe4f1;
-      border: 2px dashed #ff69b4;
-      padding: 15px;
-      margin: 20px auto;
-      width: 60%;
-      border-radius: 12px;
-      animation: fadeIn 2s ease-in-out;
-    }
-
-    .chiikawa-img {
+    .confetti-piece {
       position: absolute;
-      bottom: 0;
-      right: 0;
-      width: 250px;
-      animation: float 3s ease-in-out infinite;
+      width: 10px;
+      height: 10px;
+      background-color: #ff69b4;
+      animation: fall 5s linear infinite;
     }
 
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
+    @keyframes fall {
+      0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
     }
 
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
+    .letter {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 80px;
+      background: #fff8dc;
+      border: 2px solid #deb887;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      cursor: pointer;
+      text-align: center;
+      line-height: 80px;
+      font-weight: bold;
+      transition: transform 0.3s ease;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+    .letter:hover {
+      transform: translateX(-50%) scale(1.05);
+    }
+
+    .message {
+      position: absolute;
+      bottom: 120px;
+      left: 50%;
+      transform: translateX(-50%) scaleY(0);
+      width: 300px;
+      background: #fff;
+      border: 2px solid #ff69b4;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      text-align: center;
+      font-size: 1.2em;
+      transition: transform 0.5s ease;
+      transform-origin: bottom;
+    }
+
+    .message.open {
+      transform: translateX(-50%) scaleY(1);
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>🎉 Happy Birthday!!! 🎉</h1>
-    <div class="tip">
-      Tip: Eat cake first. Everything else can wait. 🎂✨
-    </div>
-    <img class="chiikawa-img" src="chiikawa.png" alt="Chiikawa birthday bunny">
+  <div class="confetti">
+    <!-- Generate 30 confetti pieces -->
+    <script>
+      for (let i = 0; i < 30; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti-piece';
+        confetti.style.left = Math.random() * 100 + 'vw';
+        confetti.style.animationDelay = Math.random() * 5 + 's';
+        confetti.style.backgroundColor = ['#ff69b4', '#ffd700', '#87cefa'][i % 3];
+        document.querySelector('.confetti').appendChild(confetti);
+      }
+    </script>
   </div>
+
+  <div class="letter" onclick="toggleMessage()">💌 Open Letter</div>
+  <div class="message" id="messageBox">
+    Wishing you the happiest birthday ever! 🎂✨  
+    May your day be filled with Chiikawa joy!
+  </div>
+
+  <script>
+    function toggleMessage() {
+      const box = document.getElementById('messageBox');
+      box.classList.toggle('open');
+    }
+  </script>
 </body>
 </html>
 
